@@ -1,8 +1,17 @@
 import { render, screen } from '@testing-library/react';
 import App from '../App';
 
-test('sum', () => {
-  const { getByText } = render(<App />)
+describe('Happy Path', () => {
+  describe('App Component', () => {
+    it('should render users list', () => {
 
-  expect(getByText('Hello World!')).toHaveAttribute('class', 'test')
+      const { getByText } = render(<App />)
+
+      expect(getByText('Adriano')).toBeInTheDocument();
+      expect(getByText('Giovanni')).toBeInTheDocument();
+      expect(getByText('João')).toBeInTheDocument();
+      
+
+    })
+  })  
 })
