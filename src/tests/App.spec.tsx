@@ -16,22 +16,23 @@ describe('Happy Path', () => {
     })
 
     it('should be able to add new user to users list', async () => {
-      //const user = userEvent.setup()
-      const { getByText, debug} = render(<App />)
+      const { getByText, getByPlaceholderText, debug} = render(<App />)
 
-      debug()
+      const inputElement = getByPlaceholderText('New User');
 
       const addUserButton = getByText('Add')
 
-      //await user.click(getByRole('button', {name: /Add/i}))
+      debug()
+
+      await userEvent.type(inputElement, 'New');
+
+      debug()
+
       await userEvent.click(addUserButton)
 
       debug()
 
       expect(getByText('New')).toBeInTheDocument();
-
-      
-
     })
   })  
 })
