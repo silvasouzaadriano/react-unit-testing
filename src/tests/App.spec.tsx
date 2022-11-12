@@ -16,7 +16,7 @@ describe('Happy Path', () => {
     })
 
     it('should be able to add new user to users list', async () => {
-      const { getByText, getByPlaceholderText, debug} = render(<App />)
+      const { getByText, getByPlaceholderText, findByText, debug} = render(<App />)
 
       const inputElement = getByPlaceholderText('New User');
 
@@ -32,7 +32,7 @@ describe('Happy Path', () => {
 
       debug()
 
-      expect(getByText('New')).toBeInTheDocument();
+      expect(await findByText('New')).toBeInTheDocument();
     })
   })  
 })

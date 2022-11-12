@@ -5,7 +5,9 @@ function App() {
   const [users, setUsers] = useState(['Adriano', 'Giovanni', 'João'])
 
   function addToUsersList() {
-    setUsers(state => [...state, newUser]);
+    setTimeout(() => {
+      setUsers(state => [...state, newUser]);
+    }, 500);
   }
 
   return (
