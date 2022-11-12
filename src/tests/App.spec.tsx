@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 
@@ -32,7 +32,11 @@ describe('Happy Path', () => {
 
       debug()
 
-      expect(await findByText('New')).toBeInTheDocument();
+      await waitFor(() => {
+        expect(getByText('New')).toBeInTheDocument();
+      });
+
+      
     })
   })  
 })
