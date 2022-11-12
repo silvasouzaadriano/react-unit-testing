@@ -1,4 +1,4 @@
-import { render, waitFor } from '@testing-library/react';
+import { render, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 
@@ -22,20 +22,34 @@ describe('Happy Path', () => {
 
       const addUserButton = getByText('Add')
 
-      debug()
+      //debug()
 
       await userEvent.type(inputElement, 'New');
 
-      debug()
+      //debug()
 
       await userEvent.click(addUserButton)
 
-      debug()
+      //debug()
 
       await waitFor(() => {
         expect(getByText('New')).toBeInTheDocument();
       });
 
+      
+    })
+
+    it('should be able to remove an user from users list', async () => {
+      const { getByText, getAllByText, queryByText, debug} = render(<App />)
+
+      const removeUserButtons = getAllByText('Remove')
+
+      await userEvent.click(removeUserButtons[0])
+
+      await waitFor(() => {
+        expect(queryByText('Adriano')).not.toBeInTheDocument();
+      });
+      
       
     })
   })  

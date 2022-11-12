@@ -1,8 +1,8 @@
-// start with query does not fail case the element is found out.
+// start with query does not fail case the element is not found out.
 
 // Start with get fail case the element is not found out.
 
-// Start with file is similar to get but it waits the element appear in the screen
+// Start with find is similar to get but it waits the element appear in the screen
 
 
 // Fire event allow trigger action in the application interface
