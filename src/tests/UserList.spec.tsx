@@ -1,22 +1,27 @@
-import { render, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, waitFor, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import App from '../App';
+import UserList from '../components/UserList';
 
 describe('Happy Path', () => {
   describe('App Component', () => {
-    it('should render users list', () => {
+    it('should render users list', async () => {
 
-      const { getByText } = render(<App />)
+      const { getByText, queryByText, rerender, unmount } = render(<UserList initialItems={['Diego', 'Rodz', 'Mayk']} />)
 
-      expect(getByText('Adriano')).toBeInTheDocument();
-      expect(getByText('Giovanni')).toBeInTheDocument();
-      expect(getByText('João')).toBeInTheDocument();
-      
+      expect(getByText('Diego')).toBeInTheDocument()
+      expect(getByText('Rodz')).toBeInTheDocument()
+      expect(getByText('Mayk')).toBeInTheDocument()
+
+      unmount()
+      rerender(<UserList initialItems={['Julia']} />)
+
+      expect(getByText('Julia')).toBeInTheDocument()
+      expect(queryByText('Mayk')).not.toBeInTheDocument()
 
     })
 
     it('should be able to add new user to users list', async () => {
-      const { getByText, getByPlaceholderText, findByText, debug} = render(<App />)
+      const { getByText, getByPlaceholderText, findByText, debug} = render(<UserList initialItems={[]} />)
 
       const inputElement = getByPlaceholderText('New User');
 
@@ -40,7 +45,7 @@ describe('Happy Path', () => {
     })
 
     it('should be able to remove an user from users list', async () => {
-      const { getByText, getAllByText, queryByText, debug} = render(<App />)
+      const { getByText, getAllByText, queryByText, debug} = render(<UserList initialItems={['Adriano']}/>)
 
       const removeUserButtons = getAllByText('Remove')
 
